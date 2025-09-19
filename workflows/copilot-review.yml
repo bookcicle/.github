@@ -1,0 +1,20 @@
+name: Copilot Code Review
+
+on:
+  workflow_call:   # <-- Important for reusability
+    inputs:
+      pr_number:
+        required: false
+        type: string
+
+jobs:
+  copilot-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Run Copilot Review
+        uses: github/copilot-review@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
